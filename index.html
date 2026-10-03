@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 기술적 주식 분석 통합 대시보드</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
+
+    <!-- Header -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-chart-line text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">기술적 분석 & 모멘텀 레포트</h1>
+                    <p class="text-xs text-slate-400">30년 경력 기술적 분석가 관점 종목 진단 대시보드</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-full border border-slate-700 text-xs text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                실시간 진단 데이터 통합 완료 (10월 2일 업데이트)
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-8">
+
+        <!-- Top Summary Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                <p class="text-xs text-slate-400 font-medium">분석 완료 종목</p>
+                <p class="text-2xl font-bold text-white mt-1">11개 종목</p>
+                <p class="text-xs text-blue-400 mt-2"><i class="fa-solid fa-layer-group"></i> 반도체 / 방산 / 전력 / AI 등</p>
+            </div>
+            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                <p class="text-xs text-slate-400 font-medium">TOP 추천 종목 (S등급)</p>
+                <p class="text-2xl font-bold text-emerald-400 mt-1">5개 종목</p>
+                <p class="text-xs text-emerald-500 mt-2"><i class="fa-solid fa-circle-check"></i> RFHIC, 한화솔루션, LS머티, 루닛, Sphere Corp</p>
+            </div>
+            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                <p class="text-xs text-slate-400 font-medium">눌림목 지지 관심주</p>
+                <p class="text-2xl font-bold text-amber-400 mt-1">2개 종목</p>
+                <p class="text-xs text-amber-500 mt-2"><i class="fa-solid fa-clock"></i> 대한전선, 하나마이크론</p>
+            </div>
+            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                <p class="text-xs text-slate-400 font-medium">과열 및 관망 주의주</p>
+                <p class="text-2xl font-bold text-rose-400 mt-1">4개 종목</p>
+                <p class="text-xs text-rose-500 mt-2"><i class="fa-solid fa-triangle-exclamation"></i> SFA, 인텍플러스, TFE, OCI 등</p>
+            </div>
+        </section>
+
+        <!-- Filter Buttons -->
+        <section class="flex flex-wrap gap-2 border-b border-slate-800 pb-4">
+            <button onclick="filterCards('all')" class="filter-btn active bg-blue-600 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">전체 보기</button>
+            <button onclick="filterCards('top')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold px-4 py-2 rounded-lg transition">🏆 S등급 (TOP 추천)</button>
+            <button onclick="filterCards('pullback')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold px-4 py-2 rounded-lg transition">🥈 A등급 (눌림목/모멘텀)</button>
+            <button onclick="filterCards('caution')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold px-4 py-2 rounded-lg transition">⚠️ C/D등급 (과열/주의)</button>
+        </section>
+
+        <!-- Stock Cards Grid -->
+        <section id="stock-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Sphere Corp (신규 추가) -->
+            <div class="stock-card top bg-slate-800 rounded-xl border border-emerald-500/30 overflow-hidden shadow-lg hover:border-emerald-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded">NEW · S등급</span>
+                            <span class="text-xs text-slate-400">347700</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">Sphere Corp.</h3>
+                    </div>
+                    <span class="text-emerald-400 text-sm font-semibold">완벽한 바닥 탈출</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 0선 위 상향 이격 확대 (모멘텀 폭발)</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 5.04% (대량 거래 동반 상승)</p>
+                        <p><strong class="text-slate-100">매물대:</strong> 핵심 저항선(POC 20,000원) 돌파 및 안착</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">🎯 추천 매매 전략</p>
+                        <p class="text-slate-400">1차 목표가 28,000~30,000원 / POC 지지선(20,000원) 이탈 시 손절</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RFHIC -->
+            <div class="stock-card top bg-slate-800 rounded-xl border border-emerald-500/30 overflow-hidden shadow-lg hover:border-emerald-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded">1위 · S등급</span>
+                            <span class="text-xs text-slate-400">218410</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">알에프에이치아이씨</h3>
+                    </div>
+                    <span class="text-emerald-400 text-sm font-semibold">턴어라운드</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 0선 위 상향 돌파 (대세 상승 초입)</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 수급 증가세 유지</p>
+                        <p><strong class="text-slate-100">EMA/매물대:</strong> 50일선(56,433원) 강하게 안착</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">💡 최근 호재 및 재료</p>
+                        <p class="text-slate-400">해외 방산 부문 수주 확대 + NXP 철수 반사이익</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 한화솔루션 -->
+            <div class="stock-card top bg-slate-800 rounded-xl border border-emerald-500/30 overflow-hidden shadow-lg hover:border-emerald-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded">1위 · S등급</span>
+                            <span class="text-xs text-slate-400">009830</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">한화솔루션</h3>
+                    </div>
+                    <span class="text-emerald-400 text-sm font-semibold">강력 모멘텀</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 0선 위 골든크로스 + 히스토그램 확산</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 17.07% (실질 거래량 유입 진성 상승)</p>
+                        <p><strong class="text-slate-100">EMA/매물대:</strong> POC 매물대(33,000원) 위 안착</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">🎯 추천 매매 전략</p>
+                        <p class="text-slate-400">33,000원 지지선 설정 / 34,000원 부근 분할 매수</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 루닛 -->
+            <div class="stock-card top bg-slate-800 rounded-xl border border-emerald-500/30 overflow-hidden shadow-lg hover:border-emerald-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded">S등급</span>
+                            <span class="text-xs text-slate-400">328130</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">루닛 (Lunit Inc.)</h3>
+                    </div>
+                    <span class="text-emerald-400 text-sm font-semibold">바닥 탈출</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 0선 위 양의 확장 (+103)</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 30.38% (0선 상회 수급 발산)</p>
+                        <p><strong class="text-slate-100">EMA/매물대:</strong> POC 백색선 돌파 후 상방 오픈</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">🎯 목표 및 손절가</p>
+                        <p class="text-slate-400">1차 목표가: 15,500~16,000원 / 손절가: 9,800원</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LS머티리얼즈 -->
+            <div class="stock-card top bg-slate-800 rounded-xl border border-emerald-500/30 overflow-hidden shadow-lg hover:border-emerald-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-0.5 rounded">2위 · S등급</span>
+                            <span class="text-xs text-slate-400">417200</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">LS머티리얼즈</h3>
+                    </div>
+                    <span class="text-blue-400 text-sm font-semibold">상방 열림</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 0선 막 돌파하는 초기 파동</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 9.08% (수급 재유입)</p>
+                        <p><strong class="text-slate-100">EMA/매물대:</strong> POC 매물대가 23,500원으로 높음</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">💡 분석 특징</p>
+                        <p class="text-slate-400">16,000원 돌파 시 상방 목표까지 매물 벽 얇음</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 대한전선 -->
+            <div class="stock-card pullback bg-slate-800 rounded-xl border border-amber-500/30 overflow-hidden shadow-lg hover:border-amber-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-amber-500/20 text-amber-400 text-xs font-bold px-2 py-0.5 rounded">2위 · A등급</span>
+                            <span class="text-xs text-slate-400">001440</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">대한전선</h3>
+                    </div>
+                    <span class="text-amber-400 text-sm font-semibold">눌림목 지지</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 상승 후 단기 숨고르기</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 조정 시 거래량 급감 (건전한 조정)</p>
+                        <p><strong class="text-slate-100">EMA/매물대:</strong> EMA(30,789원) 및 POC 지지</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">💡 최근 호재 및 재료</p>
+                        <p class="text-slate-400">HVDC 시장 진입 성공 + 서해안 송전망 기대감</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 하나마이크론 -->
+            <div class="stock-card pullback bg-slate-800 rounded-xl border border-amber-500/30 overflow-hidden shadow-lg hover:border-amber-500 transition">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-amber-500/20 text-amber-400 text-xs font-bold px-2 py-0.5 rounded">3위 · A등급</span>
+                            <span class="text-xs text-slate-400">067310</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">하나마이크론</h3>
+                    </div>
+                    <span class="text-amber-400 text-sm font-semibold">돌파 주도주</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <div class="bg-slate-900/60 p-3 rounded-lg space-y-1 text-slate-300">
+                        <p><strong class="text-slate-100">MACD:</strong> 히스토그램 폭발적 확장 (+1,296)</p>
+                        <p><strong class="text-slate-100">PVO:</strong> 14.23% (양전환)</p>
+                        <p><strong class="text-slate-100">EMA/매물대:</strong> POC 매물대 뚜렷하게 상회 (46,200원)</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-300 mb-1">💡 최근 호재 및 재료</p>
+                        <p class="text-slate-400">AI 서버용 DRAM 외주 확대 + 베트남 법인 흑자 전환</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이하 주의 종목들 간략화 -->
+            <div class="stock-card caution bg-slate-800 rounded-xl border border-rose-500/30 overflow-hidden shadow-lg">
+                <div class="bg-slate-800/80 p-4 border-b border-slate-700 flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-rose-500/20 text-rose-400 text-xs font-bold px-2 py-0.5 rounded">관망 · C/D등급</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mt-1">주의 및 횡보 종목</h3>
+                    </div>
+                    <span class="text-rose-400 text-sm font-semibold">리스크 관리</span>
+                </div>
+                <div class="p-4 space-y-3 text-xs">
+                    <p class="text-slate-300">SFA반도체, 인텍플러스, TFE, 에이유케이, OCI홀딩스 등</p>
+                    <div class="bg-slate-900/60 p-3 rounded-lg text-slate-400 space-y-1">
+                        <p>· SFA/인텍/TFE: 이격도 과열로 급락 리스크 큼</p>
+                        <p>· 에이유케이/OCI: MACD 침체 및 모멘텀 이탈</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        function filterCards(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            event.target.classList.add('active', 'bg-blue-600', 'text-white');
+            event.target.classList.remove('bg-slate-800', 'text-slate-300');
+
+            const cards = document.querySelectorAll('.stock-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else if (card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
