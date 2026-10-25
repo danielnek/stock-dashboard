@@ -132,23 +132,4 @@
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: function(value) {
-                                    return '$' + (value / 1000000).toFixed(1) + 'M';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
 
-        // 입력값이 변경될 때마다 차트 및 계산 결과 실시간 렌더링
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', calculateAndDraw);
-        });
-
-        // 초기 로딩 시 1회 실행
-        calculateAndDraw();
-    </script>
-</body>
-</html>
